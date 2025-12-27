@@ -2,9 +2,10 @@ name: Lint
 
 on:
   pull_request:
-    push:
-      branches: [main]
-
+  push:
+    branches: [main]
+  workflow_dispatch:
+    
 jobs:
   golangci:
     runs-on: ubuntu-latest
