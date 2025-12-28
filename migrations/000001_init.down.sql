@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS expense_split;
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS group_members;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS connections;
+DROP TABLE IF EXISTS users;
+
+DROP TYPE IF EXISTS group_role;
+DROP TYPE IF EXISTS connection_status;
+
+DROP EXTENSION IF EXISTS pgcrypto;
