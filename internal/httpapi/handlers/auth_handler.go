@@ -28,7 +28,7 @@ func NewAuthHandler(authService auth.Service) *AuthHandler {
 func (h *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	// Get logger from context (includes trace ID)
 	log := logger.FromContext(r.Context())
-
+	log.Info().Msg("Received signup request")
 	var req dto.SignUpRequest
 
 	// Decode request body
@@ -65,8 +65,6 @@ func (h *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Note: Unique constraint violations are already handled by ErrUserAlreadyExists check above
-
 		log.Error().Err(err).Str("email", req.Email).Msg("Failed to create user")
 		respondWithError(w, http.StatusInternalServerError, "Failed to create user", nil)
 		return
@@ -76,6 +74,8 @@ func (h *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		Str("user_id", user.ID.String()).
 		Str("email", user.Email).
 		Msg("User created successfully")
+
+	// welcome email logic can be added here
 
 	// Build response
 	response := dto.SignUpResponse{
