@@ -102,9 +102,12 @@ func respondWithError(w http.ResponseWriter, code int, message string, details m
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	// Note: We can't get context here, so errors are not traced
-	// Consider passing context to this function if detailed error tracking is needed
-	json.NewEncoder(w).Encode(payload)
+	if err := json.NewEncoder(w).Encode(payload); err != nil {
+		// Note: We can't get context here for trace ID logging
+		// At this point headers are already sent, so we can only log the error
+		// Consider passing context to this function if detailed error tracking is needed
+		_ = err // Acknowledge the error but can't do much at this point
+	}
 }
 
 // parseValidationErrors converts validator errors to a map

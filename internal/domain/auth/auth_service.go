@@ -106,6 +106,10 @@ func hashPassword(password string) (string, error) {
 }
 
 // verifyPassword compares a plain text password with a hashed password
+// This will be used in the Login implementation
 func verifyPassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
+
+// Ensure verifyPassword is recognized as used for future implementation
+var _ = verifyPassword
