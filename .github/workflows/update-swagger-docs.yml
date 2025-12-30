@@ -1,0 +1,50 @@
+name: Update Swagger Docs 
+
+on:
+  workflow_dispatch:
+    inputs:
+      create_pr:
+        description: 'Create a PR with changes'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  update-swagger:
+    name: Generate Swagger Docs
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Install swag
+        run: go install github.com/swaggo/swag/cmd/swag@latest
+
+      - name: Generate docs
+        run: |
+          go mod download
+          swag init -g main.go -o ./docs
+
+      - name: Create PR
+        if: ${{ github.event.inputs.create_pr == 'true' }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'docs: update Swagger documentation'
+          branch: swagger-docs-update
+          title: '📚 Update Swagger Documentation'
+          body: 'Auto-generated Swagger documentation update'
+          labels: documentation, automated
