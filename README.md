@@ -23,3 +23,25 @@ NOTE: migration scripts should start with 6 digit number. Usual format is <numbe
 
 ## Logger 
 Set up logger in this project to check progress of API requests, running status of app. Will later add a local file where all logs might be saved temporarily to make it easier to debug
+
+
+## Swagger documents 
+Commands used 
+```
+# Install swag CLI tool
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# Install required packages
+go get -u github.com/swaggo/http-swagger
+go get -u github.com/swaggo/files
+```
+
+After successfully installing and setting up swagger for your project add proper annotations to your route handlers and dto. Now every time you make a change to the route or add a new route run this command after updating the annotations
+
+```
+swag init -g main.go -o ./docs
+```
+
+You can visit your swagger docs here -- http://localhost:8080/swagger/index.html
+It will look something like this - screenshots/Screenshot 2025-12-30 at 12.48.25 PM.png
+Using this you can test APIs via postman/UI

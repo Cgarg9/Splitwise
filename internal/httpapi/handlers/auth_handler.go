@@ -24,7 +24,18 @@ func NewAuthHandler(authService auth.Service) *AuthHandler {
 	}
 }
 
-// SignUp handles user registration requests
+// SignUp gpdoc
+// @Summary      User Signup
+// @Description  Registers a new user
+// @Tags         Authentcation
+// @Accept       json
+// @Produce      json
+// @Param        signupRequest  body      dto.SignUpRequest  true  "Signup Request"
+// @Success      201  {object}  dto.SignUpResponse "User created successfully"
+// @Failure      400  {object}  dto.ErrorResponse  "Invalid request body or validation failed"
+// @Failure      409  {object}  dto.ErrorResponse  "User with this email already exists"
+// @Failure      500  {object}  dto.ErrorResponse  "Internal server error"
+// @Router       /auth/signup [post]
 func (h *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	// Get logger from context (includes trace ID)
 	log := logger.FromContext(r.Context())
