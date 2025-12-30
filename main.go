@@ -15,17 +15,17 @@ import (
 )
 
 
-// @title Splitwise Clone API
-// @version 1.0
-// @description This is a sample server for a Splitwise clone application.
-// @termsOfService http://swagger.io/terms/
+//	@title			Splitwise Clone API
+//	@version		1.0
+//	@description	This is a sample server for a Splitwise clone application.
+//	@termsOfService	http://swagger.io/terms/
 
 // host localhost:8080
-// @BasePath /api/v1	
+//	@BasePath	/api/v1	
 
 // securityDefinitions.apikey BearerAuth
-// @in header
-// @name Authorization
+//	@in		header
+//	@name	Authorization
 func main() {
 	// Setup logger with file output and rotation
 	logConfig := logger.DefaultConfig()
