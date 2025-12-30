@@ -45,3 +45,27 @@ swag init -g main.go -o ./docs
 You can visit your swagger docs here -- http://localhost:8080/swagger/index.html
 It will look something like this - screenshots/Screenshot 2025-12-30 at 12.48.25 PM.png
 Using this you can test APIs via postman/UI
+
+## Testing 
+Common commands -- 
+
+```bash
+# Run all tests in auth package
+go test ./internal/domain/auth/
+
+# Run with verbose output
+go test -v ./internal/domain/auth/
+
+# Run with coverage
+go test -cover ./internal/domain/auth/
+
+# Run specific test
+go test -run TestSignUp_Success ./internal/domain/auth/
+
+# Generate coverage HTML
+go test -coverprofile=coverage.out ./internal/domain/auth/
+go tool cover -html=coverage.out
+
+# Run all tests in project
+go test ./...
+```
