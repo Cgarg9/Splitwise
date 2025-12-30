@@ -9,6 +9,9 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rs/zerolog/log"
+
+	"github.com/swaggo/http-swagger"
+	_ "splitwise-clone/docs"
 )
 
 // Router holds the HTTP router and its dependencies
@@ -56,6 +59,10 @@ func (router *Router) setupRoutes() {
 
 	// Initialize handlers
 	authHandler := handlers.NewAuthHandler(authService)
+
+	router.Get("/swagger/*", httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition
+	))
 
 	// Health check
 	router.Get("/health", func(w http.ResponseWriter, r *http.Request) {
