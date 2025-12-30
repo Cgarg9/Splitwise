@@ -11,6 +11,8 @@ on:
         options:
           - 'true'
           - 'false'
+  schedule:
+    - cron: '0 3 * * *' # Every day at 3 AM UTC
 
 jobs:
   update-swagger:
