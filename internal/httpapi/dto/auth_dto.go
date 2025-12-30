@@ -21,6 +21,27 @@ type SignUpResponse struct {
 	CreatedAt time.Time `json:"created_at" example:"2023-01-01T00:00:00Z"`
 }
 
+// LoginRequest represents the request body for user login
+type LoginRequest struct {
+	Email    string `json:"email" validate:"required,email" example:"john.doe@example.com"`
+	Password string `json:"password" validate:"required" example:"securePassword123"`
+}
+
+// LoginResponse represents the response after successful login
+type LoginResponse struct {
+	Token     string    `json:"token" example:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."`
+	ExpiresAt time.Time `json:"expires_at" example:"2025-12-31T23:59:59Z"`
+	User      UserInfo  `json:"user"`
+}
+
+// UserInfo represents basic user information
+type UserInfo struct {
+	ID        string `json:"id" example:"550e8400-e29b-41d4-a716-446655440000"`
+	FirstName string `json:"first_name" example:"John"`
+	LastName  string `json:"last_name" example:"Doe"`
+	Email     string `json:"email" example:"john.doe@example.com"`
+}
+
 // ErrorResponse represents an error response
 type ErrorResponse struct {
 	Error   string                 `json:"error" example:"Bad Request"`

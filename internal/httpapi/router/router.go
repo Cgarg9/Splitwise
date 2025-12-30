@@ -10,8 +10,9 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rs/zerolog/log"
 
-	"github.com/swaggo/http-swagger"
 	_ "splitwise-clone/docs"
+
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 // Router holds the HTTP router and its dependencies
@@ -77,7 +78,7 @@ func (router *Router) setupRoutes() {
 		// Auth routes
 		r.Route("/auth", func(r chi.Router) {
 			r.Post("/signup", authHandler.SignUp)
-			// r.Post("/login", authHandler.Login)     // For future implementation
+			r.Post("/login", authHandler.Login)
 			// r.Post("/logout", authHandler.Logout)   // For future implementation
 		})
 
