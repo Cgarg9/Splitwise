@@ -103,17 +103,18 @@ func (h *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 // Login godoc
-// @Summary User login
-// @Description Authenticate user with email and password to get JWT token
-// @Tags Authentication
-// @Accept json
-// @Produce json
-// @Param request body dto.LoginRequest true "Login credentials"
-// @Success 200 {object} dto.LoginResponse "Successfully authenticated"
-// @Failure 400 {object} dto.ErrorResponse "Invalid request body or validation error"
-// @Failure 401 {object} dto.ErrorResponse "Invalid email or password"
-// @Failure 500 {object} dto.ErrorResponse "Internal server error"
-// @Router /auth/login [post]
+//
+//	@Summary		User login
+//	@Description	Authenticate user with email and password to get JWT token
+//	@Tags			Authentication
+//	@Accept			json
+//	@Produce		json
+//	@Param			request	body		dto.LoginRequest	true	"Login credentials"
+//	@Success		200		{object}	dto.LoginResponse	"Successfully authenticated"
+//	@Failure		400		{object}	dto.ErrorResponse	"Invalid request body or validation error"
+//	@Failure		401		{object}	dto.ErrorResponse	"Invalid email or password"
+//	@Failure		500		{object}	dto.ErrorResponse	"Internal server error"
+//	@Router			/auth/login [post]
 func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	log := logger.FromContext(r.Context())
 	log.Info().Msg("Received login request")
